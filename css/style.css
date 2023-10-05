@@ -144,6 +144,12 @@ textarea {
 	transition: background-color .25s ease-out;
 }
 
+.toc__item,
+.btn {
+	transition: background-color .25s ease-out;
+}
+
+
 /* Typography */
 h1,
 h2,
@@ -444,6 +450,7 @@ select {
 	border: 0;
 }
 
+
 /* Main menu */
 .no-js .menu__btn {
 	display: none;
@@ -547,6 +554,11 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 .menu__list--transition {
 	transition: visibility .15s ease, transform .15s ease, -webkit-transform .15s ease;
 }
+
+.toc__list--transition {
+	transition: visibility .15s ease, transform .15s ease, -webkit-transform .15s ease;
+}
+
 
 @media screen and (min-width: 767px) {
 	.menu {
@@ -1330,3 +1342,23 @@ textarea {
 		font-size: .6875rem;
 	}
 }
+
+/* TOC Menu and things */
+/* Default state for the TOC when it's hidden */
+.toc__menu {
+    display: none;
+    /* Additional styles for the hidden state, like opacity or transform, can be added here */
+}
+
+/* When the TOC is active */
+.toc__menu--active {
+    display: block;
+    /* Additional styles for the active state, like opacity or transform, can be added here */
+}
+
+/* Styling for the active TOC button */
+.toc__btn--active {
+    /* Define styles for when the TOC button is in its active state */
+}
+
+
