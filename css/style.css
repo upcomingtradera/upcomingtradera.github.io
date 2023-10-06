@@ -669,6 +669,7 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 	width: 100%;
 }
 
+
 .content a,
 .warning a,
 .authorbox__description a {
@@ -927,8 +928,10 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 
 .pagination__item:hover,
 .pagination__item--current {
-	color: #fff;
-	background: #FFCD6D;
+	color: #FFCD6D;
+	background-color: #0E171B;
+	/* background: #FFCD6D; */
+	/* color: #fff; */
 }
 
 /* Pager (prev/next links) navigation */
@@ -1272,6 +1275,16 @@ textarea {
 	.sidebar {
 		margin-top: 20px;
 	}
+
+	.meta__author-link {
+		padding-right: 1em;
+		padding-top: 1em;
+		padding-bottom: 1em;
+		margin-right: 1em;
+		margin-top: 1em;
+		margin-bottom: 1em;
+}
+
 }
 
 @media screen and (max-width: 620px) {
