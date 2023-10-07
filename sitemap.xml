@@ -2,7 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.upcomingtrader.com/blog/</loc>
+    <loc>https://www.upcomingtrader.com/search/</loc>
+    <lastmod>2023-10-07T08:41:48+08:00</lastmod>
+  </url><url>
+    <loc>https://www.upcomingtrader.com/authors/</loc>
     <lastmod>2023-09-06T12:16:37-05:00</lastmod>
   </url><url>
     <loc>https://www.upcomingtrader.com/blog/mastering-the-mindset-emotional-resilience-in-futures-trading/</loc>
@@ -54,6 +57,12 @@
     <lastmod>2023-07-28T08:41:53+08:00</lastmod>
   </url><url>
     <loc>https://www.upcomingtrader.com/about/</loc>
+    <lastmod>2023-07-28T08:41:48+08:00</lastmod>
+  </url><url>
+    <loc>https://www.upcomingtrader.com/blog/</loc>
+    <lastmod>2023-07-28T08:41:48+08:00</lastmod>
+  </url><url>
+    <loc>https://www.upcomingtrader.com/authors/ut/</loc>
     <lastmod>2023-07-28T08:41:48+08:00</lastmod>
   </url><url>
     <loc>https://www.upcomingtrader.com/privacy/</loc>
@@ -181,9 +190,5 @@
   </url><url>
     <loc>https://www.upcomingtrader.com/blog/introduction-to-futures-trading-for-beginners-and-advanced-traders/</loc>
     <lastmod>2023-03-28T12:16:37-05:00</lastmod>
-  </url><url>
-    <loc>https://www.upcomingtrader.com/authors/</loc>
-  </url><url>
-    <loc>https://www.upcomingtrader.com/authors/ut/</loc>
   </url>
 </urlset>
