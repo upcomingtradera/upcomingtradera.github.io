@@ -1,22 +1,25 @@
 // Function to send interaction data to Google Analytics
 function trackInteraction(type, x, y) {
-  gtag('send', 'event', type, 'interact', `x:${x}, y:${y}`);
+  gtag('event', type, {
+    'event_category': 'interact',
+    'event_label': `x:${x}, y:${y}`
+  });
 }
 
 // Function to handle mouse movements
 function handleMouseMove(e) {
-  trackInteraction('Mouse Movement', e.clientX, e.clientY);
+  trackInteraction('Mouse Movement - UT', e.clientX, e.clientY);
 }
 
 // Function to handle clicks
 function handleClick(e) {
-  trackInteraction('Mouse Click', e.clientX, e.clientY);
+  trackInteraction('Mouse Click - UT', e.clientX, e.clientY);
 }
 
 // Function to handle touch events
 function handleTouch(e) {
   const touch = e.touches[0];
-  trackInteraction('Touch', touch.clientX, touch.clientY);
+  trackInteraction('Touch - UT', touch.clientX, touch.clientY);
 }
 
 // Attach event listeners

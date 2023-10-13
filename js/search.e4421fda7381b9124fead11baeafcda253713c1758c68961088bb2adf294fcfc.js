@@ -46,6 +46,11 @@ function handleSearch(event) {
 
     const searchInput = document.getElementById('searchInput');
     const query = searchInput.value.trim();
+    gtag('event', 'Search JS Query - UT', {
+        'event_category': 'site_search',
+        'event_label': query
+    });
+
 
     if (!query) {
         console.log("Search query is empty.");
