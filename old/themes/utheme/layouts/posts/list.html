@@ -1,0 +1,48 @@
+{{ define "main" }}
+{{ partial "tools/article-selector" . }}
+{{ $otherArticles := .Scratch.Get "otherArticles" }}
+{{ range $otherArticles }}
+
+{{ $context := dict "context" . "articleType" "subTrendingArticles" }}
+{{ partial "tools/resize-images" $context }}
+
+{{ $smallFN := .Scratch.Get "smallJPGFileName" }}
+{{ $smallJPG := .Scratch.Get "smallJPG" }}
+{{ $mediumJPG := .Scratch.Get "mediumJPG" }}
+{{ $largeJPG := .Scratch.Get "largeJPG" }}
+
+{{ $smallWEBP := .Scratch.Get "smallWEBP" }}
+{{ $mediumWEBP := .Scratch.Get "mediumWEBP" }}
+{{ $largeWEBP := .Scratch.Get "largeWEBP" }}
+{{ $pageTitle := .Title | urlize }}
+
+<h2 class="list-page-headline"><a class="list-page-headline-link" href="{{ .Permalink }}">{{ truncate 60 "" .Title }}</a></h2>
+{{/*
+<a class="list-page-image-link" href="{{ .Permalink }}">
+	<picture class="list-pag-image-frame">
+
+
+		<source type="image/webp" 
+			srcset="{{ $smallWEBP.RelPermalink }} {{ .Site.Params.subTrendingArticles.small }}w,
+				{{ $mediumWEBP.RelPermalink }} {{ .Site.Params.subTrendingArticles.medium }}w,
+				{{ $largeWEBP.RelPermalink }} {{ .Site.Params.subTrendingArticles.large }}w" 
+			sizes="(max-width: 980px) 100vw, {{ .Site.Params.subTrendingArticles.large }}w">
+
+		<source type="image/jpeg" 
+			srcset="{{ $smallJPG.RelPermalink }} {{ .Site.Params.subTrendingArticles.small }}w,
+				{{ $mediumJPG.RelPermalink }} {{ .Site.Params.subTrendingArticles.medium }}w,
+				{{ $largeJPG.RelPermalink }} {{ .Site.Params.subTrendingArticles.large }}w" 
+			sizes="(max-width: 980px) 100vw, {{ .Site.Params.subTrendingArticles.large }}w">
+		<img class="list-page-image"
+		     src="{{ $largeJPG.RelPermalink }}" 
+		     alt="{{ $pageTitle }}" 
+		     style="width:auto;max-width:100%;">
+	</picture>
+</a>
+*/}}
+
+<h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+<time datetime="{{ .Date }}">{{ .Date.Format "January 2, 2006" }}</time>
+{{ end }}
+{{ end }}
+

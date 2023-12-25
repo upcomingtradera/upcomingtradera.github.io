@@ -1,0 +1,24 @@
+[settings]
+formats = ["avif", "webp", "png", "jpeg"]
+# sizes = ["1280x720", "640x360", "320x180", "160x90"]
+# postfixes = ["HL", "HM", "HS", "HES"]
+
+sizes = ["1280x720", "640x360", "320x180", "160x90", "1280x", "640x", "320x0", "160x"]
+postfixes = ["HL", "HM", "HS", "HES", "TL", "TM", "TS", "TES"]
+
+name = "Example Preprocess"
+type = "directory"  # or "single"
+# type = "single"  # or "directory"
+path = "/home/bb/Documents/upcomingtrader_blog/content"
+
+[preprocess]
+filetype = ".md"
+format = "frontmatter"
+# format = "none"
+
+[input]
+key = "thumbnail"
+
+[output]
+dir = "/home/bb/Documents/upcomingtrader_blog/static/optimized"
+filename_template = "{frontmatter_title}-{settings_postfixes}{upper_format}.{format}"

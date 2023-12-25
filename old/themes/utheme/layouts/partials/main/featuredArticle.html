@@ -1,0 +1,78 @@
+{{ define "featuredArticleCSS" }}
+{{- $style := resources.Get .Site.Params.css.featuredArticle | resources.ToCSS | resources.Minify | resources.Fingerprint -}} 
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}
+
+{{ partial "tools/article-selector" . }}
+{{ $featuredArticle := .Scratch.Get "featuredArticle" }}
+
+{{ range $featuredArticle }}
+<div class="featuredArticleContainer">
+	{{ $context := dict "context" . "articleType" "featuredArticle" }}
+	{{ partial "tools/resize-images" $context }}
+
+	{{ $smallFN := .Scratch.Get "smallJPGFileName" }}
+	{{ $smallJPG := .Scratch.Get "smallJPG" }}
+	{{ $mediumJPG := .Scratch.Get "mediumJPG" }}
+	{{ $largeJPG := .Scratch.Get "largeJPG" }}
+
+	{{ $smallWEBP := .Scratch.Get "smallWEBP" }}
+	{{ $mediumWEBP := .Scratch.Get "mediumWEBP" }}
+	{{ $largeWEBP := .Scratch.Get "largeWEBP" }}
+	{{ $pageTitle := .Title | urlize }}
+	<a class="featuredArticleSplashLink" href="{{ .Permalink }}">
+		<picture>
+			<source type="image/webp" 
+				srcset="{{ $smallWEBP.RelPermalink }} {{ .Site.Params.featuredArticle.small }}w,
+					{{ $mediumWEBP.RelPermalink }} {{ .Site.Params.featuredArticle.medium }}w,
+					{{ $largeWEBP.RelPermalink }} {{ .Site.Params.featuredArticle.large }}w" 
+				sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, {{ .Site.Params.featuredArticle.large }}w">
+
+			<source type="image/jpeg" 
+				srcset="{{ $smallJPG.RelPermalink }} {{ .Site.Params.featuredArticle.small }}w,
+					{{ $mediumJPG.RelPermalink }} {{ .Site.Params.featuredArticle.medium }}w,
+					{{ $largeJPG.RelPermalink }} {{ .Site.Params.featuredArticle.large }}w" 
+				sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, {{ .Site.Params.featuredArticle.large }}w">
+			<img class="featuredArticleSplashImage"
+			     src="{{ $mediumJPG.RelPermalink }}" 
+			     srcset="
+				     {{ $largeJPG.RelPermalink }} 1280w, 
+				     {{ $mediumJPG.RelPermalink }} 640w, 
+				     {{ $smallJPG.RelPermalink }} 320w"
+			     sizes="(max-width: 320px) 280px, 
+				    (max-width: 640px) 600px, 
+				    1280px"
+			     alt="{{ $pageTitle }}">
+		</picture>
+	</a>
+
+	<h2 class="featuredArticleHeadline">
+		<a class="featuredArticleHeadlineLink" href="{{ .Permalink }}">
+			{{ $Title := truncate 60 "" .Title }}
+			{{ $words := split $Title " " }}
+
+			{{ $highlightedIndex := $.Page.Params.featuredArticleHighlightedWord }}
+			{{ if not $highlightedIndex }}
+			{{ $highlightedIndex = $.Site.Params.featuredArticleHighlightedWord }}
+			{{ end }}
+
+			{{ range $index, $word := $words }}
+			{{ if eq $index $highlightedIndex }}
+			<span class="featuredArticleHeadlineHighlightedWord">{{ $word }}</span>
+			{{ else }}
+			{{ $word }}
+			{{ end }}
+			{{ if ne $index (sub (len $words) 1) }} {{/* Add space between words */}} {{ end }}
+			{{ end }}
+		</a>
+	</h2>
+	<p class="featuredArticleIntroBlurb">
+	{{ $limit := 300 }}
+	{{ $truncatedContent := truncate $limit "" .Content | plainify | safeHTML }}
+	{{ $truncatedContent }}
+	<span class="featuredArticleContinue">
+		<a class="featuredArticleContinueLink" href="{{ .Permalink }}">CONTINUE READING...</a>
+	</span>
+	</p>
+</div>
+{{ end }}

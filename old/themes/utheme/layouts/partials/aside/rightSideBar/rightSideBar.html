@@ -1,0 +1,82 @@
+{{ define "recentArticlesCSS" }}
+{{- $style := resources.Get .Site.Params.css.recentArticles | resources.ToCSS | resources.Minify | resources.Fingerprint -}} 
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}
+
+
+{{ partial "tools/article-selector" . }}
+{{ $recentArticles := .Scratch.Get "recentArticles" }}
+
+{{ $limit := 150 }}
+{{ $counter := 0 }}
+
+<h2 class="recentArticlesSectionHeadline">RECENT POSTS</h2>
+<ul class="recentArticlesContainer">
+	{{ range $recentArticles }}
+	<li class="recentArticleItem">
+		<a class="recentArticleItemHeaderSplashImageLink" href="{{ .Permalink }}">
+			{{ $pageTitle := .Title | urlize }}
+			{{ $context := dict "context" . "articleType" "recentArticles" }}
+			{{ partial "tools/resize-images" $context }}
+
+			{{ $smallFN := .Scratch.Get "smallJPGFileName" }}
+			{{ $smallJPG := .Scratch.Get "smallJPG" }}
+			{{ $mediumJPG := .Scratch.Get "mediumJPG" }}
+			{{ $largeJPG := .Scratch.Get "largeJPG" }}
+
+			{{ $smallWEBP := .Scratch.Get "smallWEBP" }}
+			{{ $mediumWEBP := .Scratch.Get "mediumWEBP" }}
+			{{ $largeWEBP := .Scratch.Get "largeWEBP" }}
+			{{ $pageTitle := .Title | urlize }}
+
+			<picture>
+
+				<source type="image/webp" 
+					srcset="{{ $smallWEBP.RelPermalink }} {{ .Site.Params.recentArticles.small }}w,
+						{{ $mediumWEBP.RelPermalink }} {{ .Site.Params.recentArticles.medium }}w,
+						{{ $largeWEBP.RelPermalink }} {{ .Site.Params.recentArticles.large }}w" 
+					sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, {{ .Site.Params.recentArticles.large }}w">
+
+				<source type="image/jpeg" 
+					srcset="{{ $smallJPG.RelPermalink }} {{ .Site.Params.recentArticles.small }}w,
+						{{ $mediumJPG.RelPermalink }} {{ .Site.Params.recentArticles.medium }}w,
+						{{ $largeJPG.RelPermalink }} {{ .Site.Params.recentArticles.large }}w" 
+					sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, {{ .Site.Params.recentArticles.large }}w">
+
+				<source type="image/webp" 
+					srcset="{{ $smallWEBP.RelPermalink }} 50w,
+						{{ $mediumWEBP.RelPermalink }} 150w,
+						{{ $largeWEBP.RelPermalink }} 300w" 
+					sizes="(max-width: 300px) 50vw, 300px">
+
+				<img class="recentArticleSplashImage"
+				     src="{{ $largeJPG.RelPermalink }}" 
+				     alt="{{ $pageTitle }}" 
+				     style="width:auto;max-width:100%;">
+
+			</picture>
+		</a>
+		<h2 class="recentArticleItemHeadline"><a class="recentArticleItemHeadlineLink" href="{{ .Permalink }}">
+				{{ $limit := 150 }}
+				{{ $title := truncate 60 "" .Title }}
+				{{ $words := split $title " " }}
+
+				{{ $highlightedIndex := .Page.Params.topPostHighlightedWord }}
+				{{ if not $highlightedIndex }}
+				{{ $highlightedIndex = .Site.Params.topPostHighlightedWord }}
+				{{ end }}
+
+				{{ range $index, $word := $words }}
+				{{ if eq $index $highlightedIndex }}
+				<span class="recentArticleItemHeadlineHighlightedWord">{{ $word}}</span>
+				{{ else }}
+				{{ $word }}
+				{{ end }}
+				{{ if ne $index (sub (len $words) 1) }} {{/* Add space between words */}} {{ end }}
+				{{ end }}
+			</a></h2>
+	</li>
+	{{ $counter = add $counter 1 }}
+	{{ end }}
+</ul>
+

@@ -1,0 +1,18 @@
+{{ define "head" }}
+{{- $style := resources.Get "css/posts/style.css" | resources.ToCSS | resources.Minify | resources.Fingerprint -}} 
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}
+
+{{ define "main" }}
+<div class="post-container">
+
+<h1 class="post-heading">{{ .Title }}</h1>
+
+{{ $_tmp := .Resources.GetMatch "feature*" }}
+{{ if $_tmp }}
+{{ $feature := $_tmp.Fill "1024x300 Smart webp q50" }}
+<img class="main-content-feature-image" src="{{$feature.Permalink}}" alt="{{.Title}}_featured-image" width=1024px height=300px>
+{{ end }}
+{{ .Content }}
+</div>
+{{ end }}

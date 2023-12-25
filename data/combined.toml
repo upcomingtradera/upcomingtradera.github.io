@@ -1,0 +1,73 @@
+[[jobs]]
+# First job (directory processing)
+[jobs.settings]
+formats = ["avif", "webp", "png", "jpeg"]
+type = "directory"
+path = "/home/bb/Documents/upcomingtrader_blog/content"
+
+[[jobs.image_types]]
+link = ""
+name = "thumbnail"
+sizes = ["1280x720", "640x360", "320x180", "160x90"]
+ratios = ["16:9", "16:9", "16:9", "16:9"]
+postfixes = ["TL", "TM", "TS", "TES"]
+
+[[jobs.image_types]]
+link = ""
+name = "header"
+sizes = ["1280x", "640x", "320x0", "160x"]
+ratios = ["16:9", "16:9", "16:9", "16:9"]
+postfixes = ["HL", "HM", "HS", "HES"]
+
+[jobs.preprocess]
+filetype = ".md"
+format = "frontmatter"
+
+[jobs.input]
+key = "thumbnail"
+
+[jobs.output]
+dir = "/home/bb/Documents/upcomingtrader_blog/static/optimized"
+local_dir = "/optimized"
+filename_template = "{frontmatter_title}-{settings_postfixes}{upper_format}.{format}"
+
+
+
+[[jobs]]
+# Second job (single file processing)
+[jobs.settings]
+formats = ["avif", "webp", "png", "jpeg"]
+type = "single"
+path = "/home/bb/Documents/upcomingtrader_blog/src_img/org_logo.jpg"
+
+[[jobs.image_types]]
+link = "upcomingtrader"
+name = "Org Logo"
+sizes = ["1024x1024", "512x512", "256x256", "128x128"]
+ratios = ["1:1", "1:1", "1:1", "1:1"]
+postfixes = ["OLL", "OLM", "OLS", "OLES"]
+title = "UPCOMINGTRADER organization logo"
+local_dir = "/optimized"
+
+[[jobs.image_types]]
+link  = "ut"
+name = "Author Logo"
+sizes = ["512x512", "256x256", "128x128", "64x64"]
+ratios = ["1:1", "1:1", "1:1", "1:1"]
+postfixes = ["ALL", "ALM", "ALS", "ALES"]
+title = "UPCOMINGTRADER author logo"
+local_dir = "/optimized"
+
+
+
+[jobs.preprocess]
+filetype = ""
+format = "image"
+
+[jobs.input]
+key = "thumbnail"
+
+[jobs.output]
+dir = "/home/bb/Documents/upcomingtrader_blog/static/optimized"
+local_dir = "/optimized"
+filename_template = "{frontmatter_title}-{settings_postfixes}{upper_format}.{format}"

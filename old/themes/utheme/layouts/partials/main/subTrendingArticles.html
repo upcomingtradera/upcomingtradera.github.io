@@ -1,0 +1,55 @@
+{{ define "subTrendingArticlesCSS" }}
+{{- $style := resources.Get .Site.Params.css.subTrendingArticles | resources.ToCSS | resources.Minify | resources.Fingerprint -}} 
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}
+
+
+{{ $limit := 300 }}
+
+{{ partial "tools/article-selector" . }}
+{{ $subTrendingArticles := .Scratch.Get "subTrendingArticles" }}
+<ul class="subTrendingArticlesHomepage">
+	{{ range $subTrendingArticles }}
+	<li class="subTrendingArticleItem">
+		{{ $context := dict "context" . "articleType" "subTrendingArticles" }}
+		{{ partial "tools/resize-images" $context }}
+
+		{{ $smallFN := .Scratch.Get "smallJPGFileName" }}
+		{{ $smallJPG := .Scratch.Get "smallJPG" }}
+		{{ $mediumJPG := .Scratch.Get "mediumJPG" }}
+		{{ $largeJPG := .Scratch.Get "largeJPG" }}
+
+		{{ $smallWEBP := .Scratch.Get "smallWEBP" }}
+		{{ $mediumWEBP := .Scratch.Get "mediumWEBP" }}
+		{{ $largeWEBP := .Scratch.Get "largeWEBP" }}
+		{{ $pageTitle := .Title | urlize }}
+
+
+		<h2 class="subTrendingArticleHeadline"><a class="subTrendingArticleHeadlineLink" href="{{ .Permalink }}">{{ truncate 60 "" .Title }}</a></h2>
+		<a class="subTrendingArticleImageLink" href="{{ .Permalink }}">
+			<picture class="subTrendingArticleSplashImageContainer">
+				<source type="image/webp" 
+					srcset="{{ $smallWEBP.RelPermalink }} {{ .Site.Params.subTrendingArticles.small }}w,
+						{{ $mediumWEBP.RelPermalink }} {{ .Site.Params.subTrendingArticles.medium }}w,
+						{{ $largeWEBP.RelPermalink }} {{ .Site.Params.subTrendingArticles.large }}w" 
+					sizes="(max-width: 980px) 100vw, {{ .Site.Params.subTrendingArticles.large }}w">
+				<source type="image/jpeg" 
+					srcset="{{ $smallJPG.RelPermalink }} {{ .Site.Params.subTrendingArticles.small }}w,
+						{{ $mediumJPG.RelPermalink }} {{ .Site.Params.subTrendingArticles.medium }}w,
+						{{ $largeJPG.RelPermalink }} {{ .Site.Params.subTrendingArticles.large }}w" 
+					sizes="(max-width: 980px) 100vw, {{ .Site.Params.subTrendingArticles.large }}w">
+				<img class="subTrendingArticleSplashImage"
+				     src="{{ $largeJPG.RelPermalink }}" 
+				     alt="{{ $pageTitle }}" 
+				     style="width:auto;max-width:100%;">
+			</picture>
+		</a>
+
+		<!--
+			<p class="sub-trending-post-author-by">BY </p><p class="feature-article-post-author"><a class="feature-article-author-link"href="#">UPCOMINGTRADER</a></p>
+			<p class="sub-trending-post-post-date">{{ .Date.Format "Jan 2, 2006" }}</p>
+			<p>{{ truncate $limit "" .Content }}</p>
+		-->
+		{{ end }}
+	</li>
+</ul>

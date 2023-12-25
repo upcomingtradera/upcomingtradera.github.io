@@ -1,0 +1,80 @@
+{{ $recentPostsCount := .Site.Params.recentPostsCount }}
+{{ $counter := 0 }}
+
+<h2 class="recent-post-header">RECENT POSTS</h2>
+{{ $limit := 150 }}
+<ul class="recent-posts-list">
+	{{ range $index, $page := where .Site.RegularPages "Type" "posts" }}
+	{{ if and (ne .Params.topPost true) (lt $counter $recentPostsCount) }}
+	<li class="recent-post-item">
+		<a class="recent-post-item-header-image-link" href="{{ .Permalink }}">
+
+
+			{{ $pageTitle := .Title | urlize }}
+
+			{{ $image := .Resources.GetMatch "feature.jpg" }}
+			{{ $LJPG := $image.Fill "300x300 smart q85" }}
+			{{ $LJPGFILENAME := printf "%s-recent-posts-image-large.jpg" $pageTitle }}
+			{{ $largeJPG := $LJPG | resources.Copy $LJPGFILENAME }}
+			{{ $MJPG := $image.Fill "150x150 smart q70" }}
+			{{ $MJPGFILENAME := printf "%s-recent-posts-image-medium.jpg" $pageTitle }}
+			{{ $mediumJPG := $LJPG | resources.Copy $MJPGFILENAME }}
+			{{ $SJPG := $image.Fill "50x50 smart q55" }}
+			{{ $SJPGFILENAME := printf "%s-recent-posts-image-small.jpg" $pageTitle }}
+			{{ $smallJPG := $LJPG | resources.Copy $SJPGFILENAME }}
+
+			{{ $LWEBP := $image.Fill "300x300 smart webp q85" }}
+			{{ $LWEBPFILENAME := printf "%s-recent-posts-image-large.webp" $pageTitle }}
+			{{ $largeWEBP := $LJPG | resources.Copy $LWEBPFILENAME }}
+			{{ $MWEBP := $image.Fill "150x150 smart webp q70" }}
+			{{ $MWEBPFILENAME := printf "%s-recent-posts-image-medium.webp" $pageTitle }}
+			{{ $mediumWEBP := $LJPG | resources.Copy $MWEBPFILENAME }}
+			{{ $SWEBP := $image.Fill "50x50 smart webp q55" }}
+			{{ $SWEBPFILENAME := printf "%s-recent-posts-image-small.webp" $pageTitle }}
+			{{ $smallWEBP := $LJPG | resources.Copy $SWEBPFILENAME }}
+
+
+			<picture>
+				<source type="image/webp" 
+					srcset="{{ $smallWEBP.RelPermalink }} 50w,
+							{{ $mediumWEBP.RelPermalink }} 150w,
+							{{ $largeWEBP.RelPermalink }} 300w" 
+					sizes="(max-width: 300px) 50vw, 300px">
+
+				<source type="image/jpeg" 
+					srcset="{{ $smallJPG.RelPermalink }} 50w,
+							{{ $mediumJPG.RelPermalink }} 150w,
+							{{ $largeJPG.RelPermalink }} 300w" 
+					sizes="(max-width: 300px) 50vw, 300px">
+
+				<img class="recent-post-header-image"
+				     src="{{ $largeJPG.RelPermalink }}" 
+				     alt="{{ $pageTitle }}" 
+				     style="width:auto;max-width:100%;">
+			</picture>
+		</a>
+		<h2 class="recent-post-item-headline"><a class="recent-post-item-headline-link" href="{{ .Permalink }}">
+				{{ $limit := 150 }}
+				{{ $title := truncate 60 "" .Title }}
+				{{ $words := split $title " " }}
+
+				{{ $highlightedIndex := .Page.Params.topPostHighlightedWord }}
+				{{ if not $highlightedIndex }}
+				{{ $highlightedIndex = .Site.Params.topPostHighlightedWord }}
+				{{ end }}
+
+				{{ range $index, $word := $words }}
+				{{ if eq $index $highlightedIndex }}
+				<span class="recent-post-item-headline-highlighted-word">{{ $word}}</span>
+				{{ else }}
+				{{ $word }}
+				{{ end }}
+				{{ if ne $index (sub (len $words) 1) }} {{/* Add space between words */}} {{ end }}
+				{{ end }}
+			</a></h2>
+	</li>
+	{{ $counter = add $counter 1 }}
+	{{ end }}
+	{{ end }}
+</ul>
+

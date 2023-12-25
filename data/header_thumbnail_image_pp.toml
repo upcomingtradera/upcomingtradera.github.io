@@ -1,0 +1,28 @@
+[settings]
+formats = ["avif", "webp", "png", "jpeg"]
+type = "directory"  # or "single"
+path = "/home/bb/Documents/upcomingtrader_blog/content"
+
+[[image_types]]
+name      = "thumbnail"
+sizes     = ["1280x720", "640x360", "320x180", "160x90"]
+ratios    = ["16:9", "16:9", "16:9", "16:9" ]
+postfixes = ["TL", "TM", "TS", "TES"]
+
+[[image_types]]
+name      = "header"
+sizes     = [ "1280x", "640x", "320x0", "160x"]
+ratios    = ["16:9", "16:9", "16:9", "16:9" ]
+postfixes = ["HL", "HM", "HS", "HES" ]
+
+[preprocess]
+filetype  = ".md"
+format    = "frontmatter"
+
+[input]
+key       = "thumbnail"
+
+[output]
+dir       = "/home/bb/Documents/upcomingtrader_blog/static/optimized"
+local_dir = "/optimized"
+filename_template = "{frontmatter_title}-{settings_postfixes}{upper_format}.{format}"

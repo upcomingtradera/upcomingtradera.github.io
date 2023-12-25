@@ -1,0 +1,80 @@
++++
+title = "Privacy Policy UPCOMINGTRADER"
+date = "2023-07-28T08:11:57+08:00"
+draft = false
+thumbnail = "feature.jpg"
+authors = ["ut"]
++++
+
+
+_Last updated: 2023_
+
+## Introduction
+
+Welcome to Upcomingtrader ("I", "we", "us", "our"). We respect your privacy and are committed to protecting your personal data. This Privacy Policy will inform you how we handle your personal data, your privacy rights, and how the law protects you. Please use the Glossary to understand the meaning of some of the terms used in this Privacy Policy.
+
+## Data We Collect About You
+
+We collect and process personal data about you when you interact with us and our products and when you purchase goods and services from us. The personal data we process includes:
+
+a. Your name
+b. Your email, phone number, and address.
+c. Payment and delivery details, including billing and delivery addresses and credit card details, where you make purchases from us;
+d. Your browsing history on our website
+e. Information about your preferences and interests
+
+## How We Collect Your Data
+
+We use different methods to collect data from and about you, including:
+
+a. Direct interactions: You may give us your identity, contact, and financial data by filling in forms or during correspondence with us.
+b. Automated technologies or interactions: As you interact with our website, we may automatically collect technical data about your device, browsing actions, and patterns. We collect this personal data by using cookies, server logs, and other similar technologies.
+
+## How We Use Your Data
+
+We will only use your personal data when the law allows us to. We use your personal data to:
+a. Process and deliver your order
+b. Manage your relationship with us
+c. Provide and improve our services
+d. Personalize your experience on our website
+e. For market research
+f. To ask for ratings, reviews of services or products
+g. To recommend products or services which may be of interest to you, and to send you marketing communications, where we have the required permission to do so
+
+## Data Retention
+
+We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.
+
+## Your Legal Rights
+
+Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to receive a copy of the personal data we hold about you, the right to request that we delete personal data held on you (where we have no good reason to continue to process it), and the right to ask us to update and correct any out-of-date or incorrect personal data that we hold about you.
+
+## Third-Party Links
+
+Our website may include links to third-party websites, plug-ins, and applications. Clicking on those links or enabling those connections may allow third parties to collect or share data about you. We do not control these third-party websites and are not responsible for their privacy statements. When you leave our website, we encourage you to read the privacy notice of every website you visit.
+
+## Advertising and Analytics Services Provided by Others
+
+We may allow others to provide analytics services and serve advertisements on our behalf across the internet and in applications. These entities may use cookies, web beacons, device identifiers, and other technologies to collect information about your use of the Services and other websites and applications, including your IP address, web browser, mobile network information, pages viewed, time spent on pages or in apps, links clicked, and conversion information. This information may be used by us and others to, among other things, analyze and track data, determine the popularity of certain content, deliver advertising and content targeted to your interests on our Services and other websites, and better understand your online activity.
+
+## Use of Google AdWords and Other Advertising/Analytics Services
+
+We may utilize the services of Google AdWords, along with other third-party analytics and advertisement providers, to promote our Services across the internet and within various applications. These entities employ cookies, web beacons, device identifiers, and other technologies to amass information about your interaction with our Services and other websites or applications.
+
+This data, which may include your IP address, web browser details, mobile network information, pages viewed, time spent on pages or in apps, links clicked, and conversion information, allows us and other parties to analyze and track data, gauge the popularity of certain content, deliver advertising and content aligned with your interests on our Services and other websites, and gain a better understanding of your online activity.
+
+In the context of Google AdWords, we may use remarketing services to advertise on third party websites (including Google) to previous visitors of our site. This could be in the form of an advertisement on the Google search results page, a site in the Google Display Network, or somewhere on Facebook. Third-party vendors, including Google, use cookies to serve ads based on someone’s past visits to our website. Any data collected will be used in accordance with our own privacy policy, as well as Google’s privacy policy.
+
+For more information about interest-based ads, or to opt out of having your web browsing information used for behavioral advertising purposes, please visit www.aboutads.info/choices. If you'd like to know more about how Google uses this data and how you can control information sent to Google, check out Google's privacy policy and ads settings.
+
+## Changes to This Privacy Policy and Your Duty to Inform Us of Changes
+
+We may make changes to this Privacy Policy from time to time. We will post any changes to our site, or notify you of any changes if legally required to do so.
+
+It is important that the personal data we hold about you is accurate and current. Please keep us informed if your personal data changes during your relationship with us.
+
+## Queries, Requests, and Concerns
+
+To exercise your legal rights or if you have any questions about this Privacy Policy, please contact us at contact at upcomingtrader dot com
+
+

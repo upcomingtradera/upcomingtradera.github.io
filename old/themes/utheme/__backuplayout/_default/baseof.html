@@ -1,0 +1,54 @@
+<html>
+<head>
+
+{{ partial "partials/head/head-base.html" . }}
+{{ block "head" . }}{{end}}
+</head>
+<body class="body-container">
+    {{ block "body" . }}{{end}}
+
+        <header class="header-container">
+	{{ partial "partials/header/header.html" . }}
+        {{ block "header" . }}{{end}}
+
+	<nav class="nav-container">
+	{{ partial "partials/nav/nav.html" . }}
+	{{ block "nav" . }}{{end}}
+	</nav> 
+	</header>
+
+
+    <main class="main-container">
+	    {{ if .IsHome }}
+	    {{ partial "partials/main-feature/feature-article.html" . }}
+	    {{ partial "partials/trending-posts/main-trending-posts.html" . }}
+	    {{ partial "partials/trending-posts/sub-trending-posts.html" . }}
+	    {{ end }}
+    {{ block "main" . }}{{end}}
+	{{/*
+    */}}
+    </main>
+
+    {{ if default .Site.Params.enableLeftSidebar .Params.enableLeftSidebar }}
+    <aside class="left-sidebar">
+	    {{ partial "partials/sidebar/left-sidebar-desktop.html" . }}
+	    {{ block "leftSidebar" . }}{{ end }}
+    </aside>
+    {{ end }}
+
+    {{ if default .Site.Params.enableRightSidebar .Params.enableRightSidebar }}
+    <aside class="right-sidebar">
+	    {{ partial "partials/sidebar/right-sidebar-desktop.html" . }}
+	    {{ block "rightSidebar" . }}{{ end }}</aside>
+    {{ block "aside" . }}{{end}}
+    </aside>
+    {{ end }}
+	{{/*
+    */}}
+
+    <footer class="footer-container">
+	    {{ partial "partials/footer/footer-base.html" . }}
+    {{ block "footer" . }}{{end}}
+    </footer>
+</body>
+</html>

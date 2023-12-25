@@ -1,0 +1,12 @@
+{{- if .Site.Author.name -}}
+<div class="meta__item-author meta__item">
+	{{ partial "svg/author.svg" (dict "class" "meta__icon") -}}
+	<span class="meta__text">
+		{{ if .Site.Author.link }}
+			<a href="{{ "/authors/" | relLangURL }}{{ .Site.Author.link | urlize }}" class="meta__author-link">{{ .Site.Author.name }}</a>
+		{{ else }}
+			{{ .Site.Author.name }}
+		{{ end }}
+	</span>
+</div>
+{{- end -}}

@@ -1,0 +1,39 @@
+{{/* {{ $images = $images | append (dict "URL" $largeJPG.RelPermalink "Width" $largeJPG.Width "Height" $largeJPG.Height "Name" "large" "Format" "jpg") }} */}}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  "url": "{{ $.Site.BaseURL }}{{ .URL }}",
+  "width": "{{ .Width }}",
+  "height": "{{ .Height }}",
+  "encodingFormat": "image/{{ .Format }}",
+  "name": "{{ .Title }} - {{ .Name }} {{ .Format }}",
+  "caption": "{{ .Title }} - {{ .Name }} {{ .Format }} image",
+  "headline": "{{ .Title }}",
+  "associatedArticle": {
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ $.Site.BaseURL }}{{ .RelPermalink }}"
+    },
+    "headline": "{{ .Title }}",
+    "image": "{{ $.Site.BaseURL }}/optimized/{{ .Title | urlize }}-HLJPG.jpg",
+    "author": {
+      "@type": "Person",
+      "name": "{{ with index .Params.author 0 }}{{ . }}{{ else }}Default Author Name{{ end }}",
+      "url": "{{ with $.Site.GetPage (printf "/authors/%s" (index .Params.author 0 | urlize)) }}{{ .Permalink }}{{ else }}#{{ end }}"
+    },
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ $.Site.Params.organization.name }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ $.Site.BaseURL }}{{ $.Site.Params.organization.logo }}"
+      }
+    }
+  }
+}
+</script>
+

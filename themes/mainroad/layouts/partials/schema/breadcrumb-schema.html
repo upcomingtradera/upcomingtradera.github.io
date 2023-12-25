@@ -1,0 +1,29 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "name": "UPCOMINGTRADER Site Breadcrumb List",
+  "itemListElement": [
+    {{ $allPages := (where .Site.RegularPages "Type" "page") }}
+    {{ $allPosts := (where .Site.RegularPages "Type" "posts") }}
+    {{ $allContent := slice }}
+    {{ range $allPages }}
+    {{ $allContent = $allContent | append . }}
+    {{ end }}
+    {{ range $allPosts }}
+    {{ $allContent = $allContent | append . }}
+    {{ end }}
+    {{ $counter := 0 }}
+    {{ range $allContent }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $counter 1 }},
+      "name": "{{ .Title }}",
+      "item": "{{ .Permalink }}"
+    }{{ if not (eq $counter (sub (len $allContent) 1)) }},{{ end }}
+    {{ $counter = add $counter 1 }}
+    {{ end }}
+  ]
+}
+</script>
+

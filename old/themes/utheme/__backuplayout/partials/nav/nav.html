@@ -1,0 +1,11 @@
+<ul class="main-menu-container">
+	{{ range .Site.Menus.main }}
+	<li class="main-menu-item">
+	{{ if eq $.Page.RelPermalink .URL }}
+	<a class="main-menu-item-link active" href="{{ .URL }}">{{ .Name }}</a>
+	{{ else }}
+	<a class="main-menu-item-link" href="{{ .URL }}">{{ .Name }}</a>
+	{{ end }}
+	</li>
+	{{ end }}
+</ul>

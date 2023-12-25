@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="search-page">
+    <h1>Search results for "{{ .Params.query }}"</h1>
+    <div id="searchLoading" style="display: none;">
+        <p>Searching...</p>
+        <!-- You can also add a spinner or any other visual indicator here -->
+    </div>
+    <div id="searchResults">
+        <!-- Search results will be populated here by JavaScript -->
+    </div>
+</div>
+{{ end }}

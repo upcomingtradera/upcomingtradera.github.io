@@ -1,0 +1,15 @@
+[
+  {{ $totalPages := len .Site.RegularPages }}
+  {{ range $index, $page := .Site.RegularPages }}
+  {
+    "type": "page",
+    "title": {{ $page.Title | jsonify }},
+    "url": {{ $page.Permalink | jsonify }},
+    "content": {{ $page.Content | safeHTML | plainify | jsonify }},
+    "pageType": {{ $page.Type | jsonify }},
+    "date": {{ $page.Date.Format "Jan _2 2006" | jsonify }},
+    "description": {{ with $page.Description }}{{ . | jsonify }}{{ else }}{{ $.Site.Title | jsonify }}{{ end }}
+  }{{ if ne $index (sub $totalPages 1) }},{{ end }}
+  {{ end }}
+]
+

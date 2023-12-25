@@ -1,0 +1,17 @@
+{{ $section := .Get "section" | default "posts" }}
+{{ $passedURL := .Get "url" | urlize }}
+{{ $fullURL := printf "/%s/%s" $section $passedURL }}
+{{ $alt := .Get "alt" | default "Link to Post" }}
+{{ $rel := .Get "rel" | default "dofollow" }}
+
+{{ $page := .Site.GetPage "page" $passedURL }}
+{{ if not $page }}
+    {{ $page = .Site.GetPage "page" $fullURL }}
+{{ end }}
+
+{{ if $page }}
+    <a href="{{ $page.RelPermalink }}" rel="{{ $rel }}">{{ $alt }}</a>
+{{ else }}
+    {{ errorf "Broken link detected: %s" $passedURL }}
+{{ end }}
+

@@ -1,0 +1,124 @@
+{{ $firstPage := "" }}
+{{ range $index, $page := .Site.RegularPages }}
+  {{ if not $page.Params.topPost }}
+    {{ $firstPage = $page }}
+    {{ break }}
+  {{ end }}
+{{ end }}
+
+{{ if ne $firstPage "" }}
+<div class="feature-article-homepage">
+	{{ $currentDate := now.Format "20060102150405.999999999" }}
+	{{ $dateHash := $currentDate | md5 }}
+	{{ $subset := substr $dateHash 0 5 }}
+	<!--
+	<h2 class="feature-article-header">FEATURED POST</h2>
+	-->
+	{{ $pageTitle := $firstPage.Title | urlize }}
+
+	{{ $image := $firstPage.Resources.GetMatch "feature.jpg" }}
+	{{ $LJPG := $image.Fill "1280x720 smart q85" }}
+	{{ $LJPGFILENAME := printf "%s-feature-image-large.jpg" $pageTitle }}
+	{{ $largeJPG := $LJPG | resources.Copy $LJPGFILENAME }}
+	{{ $MJPG := $image.Fill "800x600 smart q70" }}
+	{{ $MJPGFILENAME := printf "%s-feature-image-medium.jpg" $pageTitle }}
+	{{ $mediumJPG := $LJPG | resources.Copy $MJPGFILENAME }}
+	{{ $SJPG := $image.Fill "640x480 smart q55" }}
+	{{ $SJPGFILENAME := printf "%s-feature-image-small.jpg" $pageTitle }}
+	{{ $smallJPG := $LJPG | resources.Copy $SJPGFILENAME }}
+
+	{{ $LWEBP := $image.Fill "1280x720 smart webp q85" }}
+	{{ $LWEBPFILENAME := printf "%s-feature-image-large.webp" $pageTitle }}
+	{{ $largeWEBP := $LJPG | resources.Copy $LWEBPFILENAME }}
+	{{ $MWEBP := $image.Fill "800x600 smart webp q70" }}
+	{{ $MWEBPFILENAME := printf "%s-feature-image-medium.webp" $pageTitle }}
+	{{ $mediumWEBP := $LJPG | resources.Copy $MWEBPFILENAME }}
+	{{ $SWEBP := $image.Fill "640x480 smart webp q55" }}
+	{{ $SWEBPFILENAME := printf "%s-feature-image-small.webp" $pageTitle }}
+	{{ $smallWEBP := $LJPG | resources.Copy $SWEBPFILENAME }}
+
+	<a class="feature-post-feature-image-link" href="{{ $firstPage.Permalink }}">
+		<!--
+	<img class="feature-article-image" src="https://picsum.photos/seed/{{$subset}}/1280/720" alt="feature image alt text">
+		-->
+
+<picture>
+  <source 
+    srcset="
+    {{ $largeWEBP.RelPermalink }} 1280w, 
+    {{ $mediumWEBP.RelPermalink }} 640w, 
+    {{ $smallWEBP.RelPermalink }} 320w"
+    sizes="(max-width: 320px) 280px, 
+           (max-width: 640px) 600px, 
+           1280px"
+    type="image/webp">
+
+  <img class="feature-article-image"
+    src="{{ $mediumJPG.RelPermalink }}" 
+    srcset="
+    {{ $largeJPG.RelPermalink }} 1280w, 
+    {{ $mediumJPG.RelPermalink }} 640w, 
+    {{ $smallJPG.RelPermalink }} 320w"
+    sizes="(max-width: 320px) 280px, 
+           (max-width: 640px) 600px, 
+           1280px"
+    alt="{{ $pageTitle }}">
+</picture>
+
+		<!--
+	<img class="feature-article-image" src="https://picsum.photos/seed/{{$subset}}/820/710" alt="feature image alt text" width=820px height=710px>
+		-->
+	</a>
+	<div class="feature-article-headline-container">
+  	<h2 class="feature-article-headline">
+		<a class="feature-post-headline-link" href="{{ $firstPage.Permalink }}">
+		{{ $Title := truncate 60 "" $firstPage.Title }}
+		{{ $words := split $Title " " }}
+
+		{{ $highlightedIndex := .Page.Params.featureArticleHighlightedWord }}
+		{{ if not $highlightedIndex }}
+		  {{ $highlightedIndex = .Site.Params.featureArticleHighlightedWord }}
+		{{ end }}
+
+		{{ range $index, $word := $words }}
+		{{ if eq $index $highlightedIndex }}
+		<span class="feature-article-headline-highlighted-word">{{ $word}}</span>
+		{{ else }}
+		{{ $word }}
+		{{ end }}
+		{{ if ne $index (sub (len $words) 1) }} {{/* Add space between words */}} {{ end }}
+		{{ end }}
+
+		</a>
+	</h2>
+
+	{{ $limit := 300 }}
+	<!--
+	<p class="feature-article-intro">{{ truncate $limit ""  $firstPage.Content | plainify | safeHTML }}</p>
+	        <span class="feature-article-continue">
+			<a class="feature-article-continue-link" href="{{ $firstPage.Permalink }}">
+			CONTINUE READING
+			</a>
+		</span>
+	-->
+	<p class="feature-article-intro">
+	    {{ $truncatedContent := truncate $limit "" $firstPage.Content | plainify | safeHTML }}
+	    {{ $truncatedContent }}
+	    <span class="feature-article-continue">
+		<a class="feature-article-continue-link" href="{{ $firstPage.Permalink }}">
+		    CONTINUE READING...
+		</a>
+	    </span>
+	</p>
+
+
+
+	</div>
+	<!--
+	<p class="feature-article-author-by">BY </p><p class="feature-article-post-author"><a class="feature-article-author-link"href="#">UPCOMINGTRADER</a></p>
+	<p class="feature-article-post-date">{{ .Date.Format "Jan 2, 2006" }}</p>
+	<p>{{ $firstPage.Content }}</p>
+	-->
+{{ end }}
+</div>
+

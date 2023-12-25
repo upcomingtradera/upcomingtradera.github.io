@@ -1,0 +1,90 @@
+{{/*
+{{ partial "debuggers/check-descriptions.html" . }}
+{{ partial "debuggers/check-summary.html" . }}
+{{ partial "debuggers/check-titles.html" . }}
+*/}}
+
+
+{{ $pages := .Site.RegularPages.ByDate.Reverse }}
+{{ $topPost := where $pages ".Params.topPost" "eq" true }}
+{{ $mainPost := first 1 $pages }}
+
+{{ $mainInTop := false }}
+
+{{ range $mainPost }}
+  {{ if in $topPost . }}
+    {{ $mainInTop = true }}
+  {{ end }}
+{{ end }}
+
+{{ if $mainInTop }}
+  {{ $mainPost = first 1 (after 1 $pages) }}
+{{ end }}
+
+{{ $recentPostCount := .Site.Params.recentPostCount }}
+{{ $recentPosts := first $recentPostCount (after 1 $pages) }}
+
+{{ $trendingPostsMainCount := .Site.Params.trendingPostsMain }}
+{{ $trendingPostsMain := first $trendingPostsMainCount (after (add 1 $recentPostCount) $pages) }}
+
+{{ $trendingPostsSubCount := .Site.Params.trendingPostsSub }}
+{{ $trendingPostsSub := first $trendingPostsSubCount (after (add 1 (add $recentPostCount $trendingPostsMainCount)) $pages) }}
+
+{{ $sharedContext := dict "mainInTop" $mainInTop "mainPost" $mainPost "topPost" $topPost "recentPosts" $recentPosts "trendingPostsMain" $trendingPostsMain "trendingPostsSub" $trendingPostsSub }}
+
+{{ $.Scratch.Set "mainPost" $mainPost }}
+{{ $.Scratch.Set "topPost" $topPost }}
+{{ $.Scratch.Set "recentPosts" $recentPosts }}
+{{ $.Scratch.Set "trendingPostsMain" $trendingPostsMain }}
+{{ $.Scratch.Set "trendingPostsSub" $trendingPostsSub }}
+
+<html>
+<head>
+
+{{ partial "partials/head/head-base.html" . }}
+{{ block "head" . }}{{end}}
+</head>
+<body class="body-container">
+    {{ block "body" . }}{{end}}
+
+    {{ if $.Scratch.Get "hasHeader" }}
+    <header class="header-container">
+    {{ block "header" . }}{{end}}
+    </header>
+    {{ end }}
+
+    {{ if $.Scratch.Get "hasNav" }}
+    <nav class="nav-container">
+    {{ block "nav" . }}{{end}}
+    </nav>
+    {{ end }}
+
+    {{/*
+    <main class="main-container">
+    {{ block "main" . }}{{end}}
+    </main>
+    */}}
+
+    {{ if or (default .Site.Params.enableLeftSidebar .Params.enableLeftSidebar) (default .Site.Params.enableRightSidebar .Params.enableRightSidebar) }}
+    {{/*
+    {{ if default .Site.Params.enableLeftSidebar .Params.enableLeftSidebar }}
+    <aside class="left-sidebar">{{ block "leftSidebar" . }}{{ end }}</aside>
+    {{ end }}
+    */}}
+
+    {{/*
+    {{ if default .Site.Params.enableRightSidebar .Params.enableRightSidebar }}
+    <aside class="right-sidebar">{{ block "rightSidebar" . }}{{ end }}</aside>
+    {{ end }}
+    {{ block "aside" . }}{{end}}
+    </aside>
+    */}}
+    {{ end }}
+
+    {{ if $.Scratch.Get "hasFooter" }}
+    <footer class="footer-container">
+    {{ block "footer" . }}{{end}}
+    </footer>
+    {{ end }}
+</body>
+</html>

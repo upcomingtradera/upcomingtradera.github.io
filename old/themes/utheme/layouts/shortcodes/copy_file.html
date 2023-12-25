@@ -1,0 +1,9 @@
+{{- $sourcePath := index .Params 0 -}}
+{{- $destinationPath := index .Params 1 -}}
+
+{{- $copyErr := os.Rename $sourcePath $destinationPath -}}
+{{- if $copyErr -}}
+    Copying file failed: {{ $copyErr }}
+{{- else -}}
+    File copied successfully!
+{{- end -}}

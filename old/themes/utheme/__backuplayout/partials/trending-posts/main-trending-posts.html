@@ -1,0 +1,70 @@
+{{ $limit := 150 }}
+{{ $recentPostsCount := .Site.Params.recentPostsCount }}
+{{ $mainTrendingCount := .Site.Params.mainTrendingCount }}
+{{ $pageCount := 0 }}
+{{ $counter := 0 }}
+
+<div class="main-trending-post-homepage">
+	<h2 class="main-trending-post-section-headline">TRENDING POSTS</h2>
+	<ul class="main-trending-posts">
+		{{ range $index, $page := where .Site.RegularPages "Type" "posts" }}
+		{{ if and (not .Params.topPost) (gt $pageCount $recentPostsCount) (lt $pageCount $mainTrendingCount) }}
+		{{ $counter = add $counter 1 }}
+		<li class="main-trending-post-item item-{{ $counter }}">
+			{{ $pageTitle := .Title | urlize }}
+			{{ $image := .Resources.GetMatch "feature.jpg" }}
+			{{ $LJPG := $image.Fill "1200x480 smart q85" }}
+			{{ $LJPGFILENAME := printf "%s-main-trending-post-image-large.jpg" $pageTitle }}
+			{{ $largeJPG := $LJPG | resources.Copy $LJPGFILENAME }}
+			{{ $MJPG := $image.Fill "800x300 smart q70" }}
+			{{ $MJPGFILENAME := printf "%s-main-trending-post-image-medium.jpg" $pageTitle }}
+			{{ $mediumJPG := $LJPG | resources.Copy $MJPGFILENAME }}
+			{{ $SJPG := $image.Fill "400x160 smart q55" }}
+			{{ $SJPGFILENAME := printf "%s-main-trending-post-image-small.jpg" $pageTitle }}
+			{{ $smallJPG := $LJPG | resources.Copy $SJPGFILENAME }}
+
+			{{ $LWEBP := $image.Fill "1200x480 smart webp q85" }}
+			{{ $LWEBPFILENAME := printf "%s-main-trending-post-image-large.webp" $pageTitle }}
+			{{ $largeWEBP := $LJPG | resources.Copy $LWEBPFILENAME }}
+			{{ $MWEBP := $image.Fill "800x300 smart webp q70" }}
+			{{ $MWEBPFILENAME := printf "%s-main-trending-post-image-medium.webp" $pageTitle }}
+			{{ $mediumWEBP := $LJPG | resources.Copy $MWEBPFILENAME }}
+			{{ $SWEBP := $image.Fill "400x160 smart webp q55" }}
+			{{ $SWEBPFILENAME := printf "%s-main-trending-post-image-small.webp" $pageTitle }}
+			{{ $smallWEBP := $LJPG | resources.Copy $SWEBPFILENAME }}
+
+
+			<h2 class="main-trending-post-headline"><a class="main-trending-post-headline-link" href="{{ .Permalink }}">{{ truncate 60 "" .Title }}</a></h2>
+			<a class="main-trending-post-image-link" href="{{ .Permalink }}">
+			<picture class="main-trending-post-image-frame">
+				<source type="image/webp" 
+					srcset="{{ $smallWEBP.RelPermalink }} 400w,
+						{{ $mediumWEBP.RelPermalink }} 800w,
+						{{ $largeWEBP.RelPermalink }} 1200w" 
+					sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, 1200px">
+
+				<source type="image/jpeg" 
+					srcset="{{ $smallJPG.RelPermalink }} 400w,
+						{{ $mediumJPG.RelPermalink }} 800w,
+						{{ $largeJPG.RelPermalink }} 1200w" 
+					sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, 1200px">
+
+				<img class="main-trending-post-image"
+				     src="{{ $largeJPG.RelPermalink }}" 
+				     alt="{{ $pageTitle }} feature image" 
+				     style="width:auto;max-width:100%;">
+			</picture>
+			</a>
+
+
+			<!--
+				<p class="main-trending-post-author-by">BY </p><p class="feature-article-post-author"><a class="feature-article-author-link"href="#">UPCOMINGTRADER</a></p>
+				<p class="main-trending-post-post-date">{{ .Date.Format "Jan 2, 2006" }}</p>
+				<p>{{ truncate $limit "" .Content }}</p>
+			-->
+			{{ end }}
+			{{ $pageCount = add $pageCount 1 }}
+			{{ end }}
+		</li>
+	</ul>
+</div>

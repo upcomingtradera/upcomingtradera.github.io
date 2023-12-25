@@ -1,0 +1,44 @@
+{{ with .Params.thumbnail }}
+    {{ $thumbnail := $.Resources.GetMatch . }}
+    {{ if $thumbnail }}
+        {{ $title := $.Title | urlize }}
+        {{ range $index, $size := $.Site.Params.thumbnail_sizes.sizes }}
+            {{ $prefix := index $.Site.Params.thumbnail_sizes.prefixes $index }}
+            {{ range $format := $.Site.Params.post_headers.formats }}
+                {{ $resizedImage := $thumbnail.Resize $size }}
+                {{ with $resizedImage | resources.Copy (print "optimized/" $title "-" $prefix "." $format) }}
+		    {{ $resizedImage = . }}
+		    {{/*
+		    [ {{ $resizedImage.RelPermalink }} ]
+                    [ {{ (print $prefix "_" $format) }} ]
+                    {{ $.Scratch.Set (print $prefix "_" $format) $resizedImage }}
+		    {{ $fn := (print $prefix "_" $format) }}
+                    {{ $.Scratch.Set (print $prefix "_" $format) $resizedImage }}
+		    */}}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ with .Params.thumbnail }}
+    {{ $header := $.Resources.GetMatch . }}
+    {{ if $header }}
+        {{ $title := $.Title | urlize }}
+        {{ range $index, $size := $.Site.Params.header_sizes.sizes }}
+            {{ $prefix := index $.Site.Params.header_sizes.prefixes $index }}
+            {{ range $format := $.Site.Params.post_headers.formats }}
+                {{ $resizedImage := $header.Resize $size }}
+                {{ with $resizedImage | resources.Copy (print "optimized/" $title "-" $prefix "." $format) }}
+		    {{ $resizedImage = . }}
+		    {{/*
+		    [ {{ $resizedImage.RelPermalink }} ]
+                    [ {{ (print $prefix "_" $format) }} ]
+		    {{ $fn := (print $prefix "_" $format) }}
+                    {{ $.Scratch.Set (print $prefix "_" $format) $resizedImage }}
+		    */}}
+                {{ end }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}

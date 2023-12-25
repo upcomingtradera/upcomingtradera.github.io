@@ -1,0 +1,12 @@
+{{ define "check_description" }}
+  {{ $description := .Description }}
+  {{ if $description }}
+    {{ if gt (len $description) 160 }}
+      {{ $description = slicestr $description 0 157 }}
+      {{ $description = print $description "..."}}
+    {{ end }}
+    <meta name="description" content="{{ $description }}">
+  {{ else }}
+    <meta name="description" content="Default description here.">
+  {{ end }}
+{{ end }}

@@ -1,0 +1,23 @@
+{{ $context := .context }}
+{{ $defaultThumbnail := .defaultThumbnail }}
+{{ $resource := .resource }}
+{{ $title := .title | urlize }}
+{{ $betterThumbnail := printf "%s.jpg" $title }}
+
+{{ $image := $resource }}
+
+{{ $sizes := dict "postLarge" "1030" "postMedium" "515" "postSmall" "258" "listLarge" "235" "listMedium" "118" "listSmall" "80" "og" "1200" "tc" "1200" }}
+{{ $qualities := dict "postLarge" "85" "postMedium" "70" "postSmall" "55" "listLarge" "85" "listMedium" "70" "listSmall" "55" "og" "70" "tc" "70" }}
+{{ $formats := slice "JPG" "WEBP" "PNG" }}
+
+
+{{ with $image }}
+	{{ warnf .RelPermalink }}
+	{{ with . | resources.Copy "test.jpg" }}
+	{{ end }}
+{{ end }}
+
+{{ range $format := $formats }}
+	{{ $_format := (lower $format) }}
+	{{ warnf $_format }}
+{{ end }}

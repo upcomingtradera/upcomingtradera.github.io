@@ -1,0 +1,53 @@
+{{ define "head" }}
+{{- $style := resources.Get "css/homepage/style.css" | resources.ToCSS | resources.Minify | resources.Fingerprint -}} 
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}
+
+{{/*
+{{ define "header" }}
+{{ $.Scratch.Set "hasHeader" false }}
+{{ end }}
+
+{{ define "nav" }}
+{{ $.Scratch.Set "hasNav" false }}
+{{ end }}
+
+
+
+{{ define "leftSidebar" }}
+{{ $topPost := $.Scratch.Get "topPost" }}
+{{ partial "homepage/top-posts-section/top-posts.html" $topPost }}
+{{ end }}
+
+
+{{ define "rightSidebar" }}
+{{ $recentPosts := $.Scratch.Get "recentPosts" }}
+{{ partial "homepage/recent-posts/recent-posts-mini.html" $recentPosts }}
+{{ end }}
+
+
+{{ define "main" }}
+{{ $mainPost := $.Scratch.Get "mainPost" }}
+{{ partial "homepage/main-post/main-post.html" $mainPost }}
+
+{{ $trendingPostsMain := $.Scratch.Get "trendingPostsMain" }}
+{{ partial "homepage/trending-posts/trending-posts-main.html" $trendingPostsMain }}
+
+{{ $trendingPostsSub := $.Scratch.Get "trendingPostsSub" }}
+{{ partial "homepage/trending-posts/trending-posts-sub.html" $trendingPostsSub }}
+{{ end }}
+
+
+{{ define "footer" }}
+{{ $.Scratch.Set "hasFooter" false }}
+{{ end }}
+
+
+
+
+{{ $.Scratch.Set "mainPost" $mainPost }}
+{{ $.Scratch.Set "topPost" $topPost }}
+{{ $.Scratch.Set "recentPosts" $recentPosts }}
+{{ $.Scratch.Set "trendingPostsMain" $trendingPostsMain }}
+{{ $.Scratch.Set "trendingPostsSub" $trendingPostsSub }}
+*/}}

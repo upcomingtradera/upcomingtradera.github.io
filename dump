@@ -1,0 +1,19 @@
+Start building sites … 
+hugo v0.118.2+extended linux/amd64 BuildDate=2023-10-11T13:53:35Z VendorInfo=debian:0.118.2-1
+
+WARN  Environment production
+WARN  Matched permalink: https://www.upcomingtrader.com/blog/mastering-the-mindset-emotional-resilience-in-futures-trading/
+WARN  --vid_url: https://www.upcomingtrader.com/mastering-the-mindset-emotional-resilience-in-futures-trading/
+
+                   |  EN   
+-------------------+-------
+  Pages            |  108  
+  Paginator pages  |   46  
+  Non-page files   |  104  
+  Static files     | 3143  
+  Processed images |    0  
+  Aliases          |    3  
+  Sitemaps         |    1  
+  Cleaned          |    0  
+
+Total in 1495 ms

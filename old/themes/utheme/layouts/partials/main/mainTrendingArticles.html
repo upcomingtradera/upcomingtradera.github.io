@@ -1,0 +1,58 @@
+{{ define "mainTrendingArticlesCSS" }} 
+{{- $style := resources.Get .Site.Params.css.mainTrendingArticles | resources.ToCSS | resources.Minify | resources.Fingerprint -}} 
+<link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ end }}
+
+
+{{ $limit := 150 }}
+{{ $pageCount := 0 }}
+{{ $counter := 0 }}
+
+
+{{ partial "tools/article-selector" . }}
+{{ $mainTrendingArticles := .Scratch.Get "mainTrendingArticles" }}
+<div class="mainTrendingArticlesHomepage">
+	<h2 class="mainTrendingArticlesSectionHeadline">TRENDING POSTS</h2>
+	<ul class="mainTrendingArticles">
+		{{ range $mainTrendingArticles }}
+		{{ $counter = add $counter 1 }}
+		<li class="mainTrendingArticlesItem article-{{ $counter }}">
+			<h2 class="mainTrendingArticlesheadline">
+				<a class="mainTrendingArticlesHeadlineLink" href="{{ .Permalink }}">{{ truncate 60 "" .Title }}</a>
+			</h2>
+			{{ $context := dict "context" . "articleType" "subTrendingArticles" }}
+			{{ partial "tools/resize-images" $context }}
+
+			{{ $smallFN := .Scratch.Get "smallJPGFileName" }}
+			{{ $smallJPG := .Scratch.Get "smallJPG" }}
+			{{ $mediumJPG := .Scratch.Get "mediumJPG" }}
+			{{ $largeJPG := .Scratch.Get "largeJPG" }}
+
+			{{ $smallWEBP := .Scratch.Get "smallWEBP" }}
+			{{ $mediumWEBP := .Scratch.Get "mediumWEBP" }}
+			{{ $largeWEBP := .Scratch.Get "largeWEBP" }}
+			{{ $pageTitle := .Title | urlize }}
+			<a class="mainTrendingArticlesSplashImageLink" href="{{ .Permalink }}">
+				<picture class="mainTrendingArticlesimageContainer">
+					<source type="image/webp" 
+						srcset="{{ $smallWEBP.RelPermalink }} {{ .Site.Params.mainTrendingArticles.small }}w,
+							{{ $mediumWEBP.RelPermalink }} {{ .Site.Params.mainTrendingArticles.medium }}w,
+							{{ $largeWEBP.RelPermalink }} {{ .Site.Params.mainTrendingArticles.large }}w" 
+						sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, {{ .Site.Params.mainTrendingArticles.large }}w">
+
+					<source type="image/jpeg" 
+						srcset="{{ $smallJPG.RelPermalink }} {{ .Site.Params.mainTrendingArticles.small }}w,
+							{{ $mediumJPG.RelPermalink }} {{ .Site.Params.mainTrendingArticles.medium }}w,
+							{{ $largeJPG.RelPermalink }} {{ .Site.Params.mainTrendingArticles.large }}w" 
+						sizes="(max-width: 400px) 100vw, (max-width: 800px) 50vw, {{ .Site.Params.mainTrendingArticles.large }}w">
+					<img class="mainTrendingArticlesSplashImage"
+					     src="{{ $largeJPG.RelPermalink }}" 
+					     alt="{{ $pageTitle }} feature image" 
+					     style="width:auto;max-width:100%;">
+				</picture>
+			</a>
+		</li>
+		{{ $pageCount = add $pageCount 1 }}
+		{{ end }}
+	</ul>
+</div>

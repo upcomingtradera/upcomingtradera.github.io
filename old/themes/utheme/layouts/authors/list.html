@@ -1,0 +1,27 @@
+<h1>{{ .Title }}</h1>
+<ul>
+{{ range $name, $author := .Site.Taxonomies.authors }}
+  <li>
+    <a href="{{ `authors/` | relLangURL }}{{ $name | urlize }}">
+      <h2>{{ $name }}</h2>
+    </a>
+    {{ if isset $.Site.Params.authors $name }}
+    <img src="{{ ($.Site.Params.authors.Get $name).image }}" alt="{{ $name }}">
+    <p>{{ ($.Site.Params.authors.Get $name).bio }}</p>
+    {{ end }}
+    <h3>Articles:</h3>
+    <ul>
+    {{ range $author.Pages }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{ end }}
+    </ul>
+  </li>
+</ul>
+
+<p>Connect with {{ $name }}:</p>
+<ul>
+    <li><a href="https://youtube.com/{{ ($.Site.Params.authors.Get $name).social.youtube }}">YouTube</a></li>
+    <li><a href="https://twitter.com/{{ ($.Site.Params.authors.Get $name).social.twitter }}">Twitter</a></li>
+</ul>
+
+{{ end }}

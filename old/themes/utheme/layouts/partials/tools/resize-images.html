@@ -1,0 +1,36 @@
+{{ $context := .context }}
+{{ $pageTitle := $context.Title | urlize }}
+{{ $context.Scratch.Set "image" nil }}
+
+{{ with $context.Resources.Get "feature.jpg" }}
+{{ $context.Scratch.Set "image" . }}
+{{ else }}
+{{ $context.Scratch.Set "image" (resources.Get "fallback-feature.jpg") }}
+{{ end }}
+
+{{ $image := $context.Scratch.Get "image" }}
+
+{{ $articleType := .articleType }}
+
+{{/* Get the image size parameters for the article type. If not found, use the defaultArticle */}}
+{{ $sizes := index $context.Site.Params.imageSizes $articleType }}
+{{ if eq $sizes nil }}
+{{ $sizes = index $context.Site.Params.imageSizes "defaultArticle" }}
+{{ end }}
+
+{{ $qualities := dict "large" "85" "medium" "70" "small" "55" "default" "70" }}
+{{ $formats := slice "JPG" "WEBP" }}
+
+{{ range $format := $formats }}
+{{ range $size, $dimension := $sizes }}
+{{ $context.Scratch.Set (printf "%s%s" $size $format) nil }}
+{{ $context.Scratch.Set (printf "%s%sFileName" $size $format) nil }}
+{{ with $image }}
+{{ $resizedImg := .Fill (printf "%s smart Center q%s %s" $dimension (index $qualities $size) (lower $format)) }}
+{{ $resizedImgFileName := printf "%s-%s-image-%s.%s" $pageTitle $articleType $size (lower $format) }}
+{{ $copiedImage := resources.Copy $resizedImgFileName $resizedImg }}
+{{ $context.Scratch.Set (printf "%s%s" $size $format) $copiedImage }}
+{{ $context.Scratch.Set (printf "%s%sFileName" $size $format) $resizedImgFileName }}
+{{ end }}
+{{ end }}
+{{ end }}

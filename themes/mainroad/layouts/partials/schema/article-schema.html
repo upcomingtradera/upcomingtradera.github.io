@@ -1,0 +1,53 @@
+{{ if .IsPage }} <!-- Check if it's a single post page -->
+    <!-- Generate schema for single post -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ .Title }}",
+        "image": "{{ .Site.BaseURL }}/optimized/{{ .Title | urlize }}-HLJPG.jpg",
+        "author": {
+            "@type": "Person",
+            "name": "{{ index .Params.authors 0 }}"
+        },
+
+        "datePublished": "{{ .Params.date.Format "2006-01-02T15:04:05Z07:00" }}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ .Site.Params.organization.name }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ .Site.BaseURL }}{{ .Site.Params.organization.logo }}"
+            }
+        }
+    }
+    </script>
+{{ else }} <!-- It's a list page -->
+    <!-- Loop through the articles and generate schema for each -->
+    {{ range .Paginator.Pages }}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ .Title }}",
+        "image": "{{ $.Site.BaseURL }}/optimized/{{ .Title | urlize }}-HLJPG.jpg",
+        "author": {
+            "@type": "Person",
+            "name": "{{ index .Params.authors 0 }}",
+            "url": "{{ with .Site.GetPage (printf "/authors/%s" (index .Params.authors 0 | urlize)) }}{{ .Permalink }}{{ end }}"
+        },
+	{{ .Params.date }}
+        "datePublished": "{{ .Params.date.Format "2006-01-02T15:04:05Z07:00" }}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ $.Site.Params.organization.name }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ $.Site.BaseURL }}{{ $.Site.Params.organization.logo }}"
+            }
+        }
+    }
+    </script>
+    {{ end }}
+{{ end }}
+

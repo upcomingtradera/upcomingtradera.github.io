@@ -1,0 +1,257 @@
+/* HEADER CSS ------------------------------ BEGIN ------------------------------ */
+.header-container {
+	display: grid;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: repeat(2, auto);
+	grid-column: 1/ span 24;
+	grid-row: 2/ span -1;
+	background-color: #0E171B;
+}
+.site-title {
+	grid-column: 1/ span 24;
+	justify-items: center;
+	justify-self: center;
+	font-weight: 900;
+	font-size: 96px;
+	color: #37C1DE;
+}
+.main-menu-item {
+	font-size: 24px;
+	font-weight: 900;
+	color: #EAECEB;
+	margin-right: 28px;
+}
+.main-menu-item-link.active {
+	text-decoration: underline solid #FECC61 5px;
+}
+.nav-container {
+	display: grid;
+	grid-template-columns: repeat(24, auto);
+	grid-template-rows: auto;
+	grid-column: 1/ span 24;
+	justify-self: center;
+	align-self: center;
+	padding-bottom: 1.25em;
+}
+.main-menu-container {
+	display: grid;
+	grid-auto-flow: column;
+}
+/* HEADER CSS ------------------------------  END  ------------------------------ */
+/* TOPPOST CSS ------------------------------ BEGIN ------------------------------ */
+.left-sidebar {
+	grid-column: 1/ span 6;
+	grid-row: 2/ span 20;
+	/* background-color: gold; */
+	display: grid;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: repeat(24, 1fr);
+	min-width: 300px;
+	width: 100%;
+}
+.top-posts-homepage-container {
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(24, 1fr);
+}
+.top-post-header {
+	grid-column: 1/ -1;
+	font-weight: 900;
+	font-size: 48px;
+	justify-self: center;
+	align-self: center;
+}
+.top-posts-list {
+	margin-left: 0.15em;
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(24, minmax(auto, 1fr));
+	grid-template-rows: repeat(24, minmax(auto, 1fr));
+	max-width: 100%;
+	/*
+	grid-auto-flow: row;
+	grid-template-rows: auto;
+	*/
+}
+.top-post-item {
+	margin-bottom: 0.75em;
+	grid-column: 1/ -1;
+}
+.top-post-headline-link {
+	font-weight: 900;
+	font-size: 38px;
+	line-height: 105%;
+}
+.top-post-headline-highlighted-word {
+	text-transform: uppercase;
+	color: #3EC9E4;
+}
+.top-post-blurb::first-letter {
+  	font-size: 1.25em;
+	font-weight: 500;
+}
+.top-post-blurb {
+	margin-top: 0.5em;
+	text-indent: 1em;
+	font-weight: 200;
+	line-height: 125%;
+	font-size: 18px;
+
+}
+.top-post-continue {
+	display: inline;
+	font-size: 18px;
+	font-weight:900;
+	color: #FFCD6D;
+}
+.top-post-item-header-image img {
+  min-width: 300px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.author-by {
+	font-size: 18px;
+	font-weight: 900;
+	color: #EDF1F0;
+	grid-column: 18/ span 1;
+	grid-row: 48/ span 20;
+}
+
+.post-author {
+	font-size: 18px;
+	font-weight: 900;
+	color: #84D6E8;
+	grid-column: 25/ span 5;
+	grid-row: 48/ span 20;
+}
+
+.top-post-date {
+	font-size: 20px;
+	font-weight: 500;
+	color: #368CB3;
+	grid-column: 33/ span 28;
+	grid-row: 53/ span 10;
+
+}
+/* TOPPOST CSS ------------------------------  END  ------------------------------ */
+
+/* MAIN-CONTAINER CSS ------------------------------ BEGIN ------------------------------ */
+.main-container {
+	display: grid;
+	grid-row: 2/ span 4;
+	grid-column: 7/ span 14;
+
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: auto;
+}
+
+.feature-article-homepage {
+	display: grid;
+	grid-column: 1/ -1;
+	grid-row: 1/ span 3;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: repeat(24, 1fr);
+}
+
+.featured-article {
+	grid-column: 1/ -1;
+	grid-row: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: repeat(24, 1fr);
+}
+.feature-article-image {
+	grid-column: 1/ -1;
+	grid-row: 1/ span 4;
+	width: 100%;
+}
+.feature-post-feature-image-link {
+	grid-column: 1/ -1;
+	grid-row: 1/ span 4;
+	width: 100%;
+
+}
+.feature-article-headline-container {
+	grid-column: 1/ -1;
+	grid-row: 4/ -1;
+	
+        background-color: rgba(237, 238, 240, 0.75); /* #EDEEF0 with 50% transparency */
+        color: #0F171C;
+	font-size: 36px;
+}
+.feature-article-headline {
+	margin-top: 0.5em;
+	text-align: center;
+	font-weight: 900;
+	font-size: 36px;
+	color: #0F171C;
+}
+.feature-article-intro {
+	text-align: left;
+	margin-left: 0.5em;
+	font-weight: 200;
+	font-size: 18px;
+	color: #0F171C;
+}
+.featured-post-continue {
+	display: block;
+	text-align: center;
+	font-size: 24px;
+	font-weight:900;
+	background-color: #0F171C;
+	color: #FFCD6D;
+}
+/* MAIN-CONTAINER CSS ------------------------------ END ------------------------------ */
+.main-trending-post-homepage {
+	grid-column: 1/ -1;
+	grid-row: 8/ span 4;
+}
+
+/* MAIN-CONTAINER CSS ------------------------------  END  ------------------------------ */
+.right-sidebar {
+	display: grid;
+	grid-column: 21/ span 5;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: auto;
+}
+.recent-posts-homepage-container {
+	display: grid;
+	grid-column: 1/ -1;
+}
+.recent-post-header {
+	font-weight: 900;
+	font-size: 36px;
+	text-align: center;
+	justify-self: center;
+}
+.recent-posts-list {
+	margin-left: 0.15em;
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(24, minmax(auto, 1fr));
+	grid-template-rows: repeat(24, minmax(auto, 1fr));
+	max-width: 100%;
+}
+.recent-post-item {
+	display: grid;
+	margin-bottom: 0.75em;
+	grid-column: 1/ -1;
+
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: auto;
+}
+.recent-post-item-header-image {
+	grid-column: 1/ span 3;
+}
+.recent-post-headline {
+	grid-column: 3/ -1;
+	font-weight: 900;
+	font-size: 18px;
+}
+.footer-container {
+	grid-column: 1/ span 24;
+	grid-row: 20/ span 4;
+	background-color: #0E171B;
+
+}

@@ -1,0 +1,72 @@
+{{ $limit := 300 }}
+{{ $mainTrendingCount := .Site.Params.mainTrendingCount }}
+{{ $subTrendingCount := .Site.Params.subTrendingCount }}
+{{ $pageCount := 0 }}
+
+<ul class="sub-trending-posts">
+	{{ range $index, $page := where .Site.RegularPages "Type" "posts" }}
+	{{ if and (not .Params.topPost) (gt $pageCount $mainTrendingCount) (le $pageCount $subTrendingCount) }}
+	<li class="sub-trending-post-item">
+		<!-- Render the page content here -->
+		{{ $currentDate := now.Format "20060102150405.999999999" }}
+		{{ $dateHash := $currentDate | md5 }}
+		{{ $subset := substr $dateHash 0 5 }}
+		<h2 class="sub-trending-post-headline"><a class="sub-trending-post-headline-link" href="{{ .Permalink }}">{{ truncate 60 "" .Title }}</a></h2>
+
+		{{ $pageTitle := .Title | urlize }}
+
+		{{ $image := .Resources.GetMatch "feature.jpg" }}
+		{{ $LJPG := $image.Fill "1920x200 smart q85" }}
+		{{ $LJPGFILENAME := printf "%s-recent-posts-image-large.jpg" $pageTitle }}
+		{{ $largeJPG := $LJPG | resources.Copy $LJPGFILENAME }}
+		{{ $MJPG := $image.Fill "960x100 smart q70" }}
+		{{ $MJPGFILENAME := printf "%s-recent-posts-image-medium.jpg" $pageTitle }}
+		{{ $mediumJPG := $LJPG | resources.Copy $MJPGFILENAME }}
+		{{ $SJPG := $image.Fill "480x50 smart q55" }}
+		{{ $SJPGFILENAME := printf "%s-recent-posts-image-small.jpg" $pageTitle }}
+		{{ $smallJPG := $LJPG | resources.Copy $SJPGFILENAME }}
+
+		{{ $LWEBP := $image.Fill "1920x200 smart webp q85" }}
+		{{ $LWEBPFILENAME := printf "%s-recent-posts-image-large.webp" $pageTitle }}
+		{{ $largeWEBP := $LJPG | resources.Copy $LWEBPFILENAME }}
+		{{ $MWEBP := $image.Fill "960x100 smart webp q70" }}
+		{{ $MWEBPFILENAME := printf "%s-recent-posts-image-medium.webp" $pageTitle }}
+		{{ $mediumWEBP := $LJPG | resources.Copy $MWEBPFILENAME }}
+		{{ $SWEBP := $image.Fill "480x50 smart webp q55" }}
+		{{ $SWEBPFILENAME := printf "%s-recent-posts-image-small.webp" $pageTitle }}
+		{{ $smallWEBP := $LJPG | resources.Copy $SWEBPFILENAME }}
+
+		<a class="sub-trending-post-image-link" href="{{ .Permalink }}">
+		<picture class="sub-trending-post-image-frame">
+			<source type="image/webp" 
+				srcset="{{ $smallWEBP.RelPermalink }} 245w,
+					 {{ $mediumWEBP.RelPermalink }} 490w,
+					 {{ $largeWEBP.RelPermalink }} 980w" 
+				sizes="(max-width: 980px) 100vw, 980px">
+
+			<source type="image/jpeg" 
+				srcset="{{ $smallJPG.RelPermalink }} 245w,
+					 {{ $mediumJPG.RelPermalink }} 490w,
+					 {{ $largeJPG.RelPermalink }} 980w" 
+				sizes="(max-width: 980px) 100vw, 980px">
+
+			<img class="sub-trending-post-image"
+			     src="{{ $largeJPG.RelPermalink }}" 
+			     alt="{{ $pageTitle }}" 
+			     style="width:auto;max-width:100%;">
+		</picture>
+		</a>
+
+
+		<!--
+			<img class="sub-trending-post-image" src="https://picsum.photos/seed/{{$subset}}/900/150" alt="feature image alt text">
+			<p class="sub-trending-post-author-by">BY </p><p class="feature-article-post-author"><a class="feature-article-author-link"href="#">UPCOMINGTRADER</a></p>
+			<p class="sub-trending-post-post-date">{{ .Date.Format "Jan 2, 2006" }}</p>
+			<p>{{ truncate $limit "" .Content }}</p>
+		-->
+		{{ end }}
+
+		{{ $pageCount = add $pageCount 1 }}
+		{{ end }}
+	</li>
+</ul>

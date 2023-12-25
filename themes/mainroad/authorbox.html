@@ -1,0 +1,114 @@
+{{- if .Param "authorbox" }}
+<div class="authorbox clearfix">
+    {{- if and (not .Site.Author.avatar) (not .Site.Author.name) (not .Site.Author.bio) }}
+    <p class="authorbox__warning">
+        <strong>WARNING:</strong> Authorbox is activated, but [Author] parameters are not specified.
+    </p>
+    {{- end }}
+
+    {{ $avatarFilename := .Site.Author.avatar }}
+    {{ $originalAvatar := resources.Get $avatarFilename }}
+
+    {{ if $originalAvatar }}
+        {{ $urlizedName := .Site.Author.name | urlize }}
+
+	    <!-- PNG Images -->
+	    {{ $largeAvatarPNG := $originalAvatar.Resize "512x512" }}
+	    {{ with $largeAvatarPNG | resources.Copy (print "assets/avatar/" $urlizedName "-L.png") }}
+		{{ $largeAvatarPNG = . }}
+	    {{ end }}
+
+	    {{ $mediumAvatarPNG := $originalAvatar.Resize "256x256" }}
+	    {{ with $mediumAvatarPNG | resources.Copy (print "assets/avatar/" $urlizedName "-M.png") }}
+		{{ $mediumAvatarPNG = . }}
+	    {{ end }}
+
+	    {{ $smallAvatarPNG := $originalAvatar.Resize "128x128" }}
+	    {{ with $smallAvatarPNG | resources.Copy (print "assets/avatar/" $urlizedName "-S.png") }}
+		{{ $smallAvatarPNG = . }}
+	    {{ end }}
+
+	    {{ $extraSmallAvatarPNG := $originalAvatar.Resize "64x64" }}
+	    {{ with $extraSmallAvatarPNG | resources.Copy (print "assets/avatar/" $urlizedName "-XS.png") }}
+		{{ $extraSmallAvatarPNG = . }}
+	    {{ end }}
+
+	    <!-- WebP Images -->
+	    {{ $largeAvatarWEBP := $originalAvatar.Resize "512x512 webp" }}
+	    {{ with $largeAvatarWEBP | resources.Copy (print "assets/avatar/" $urlizedName "-L.webp") }}
+		{{ $largeAvatarWEBP = . }}
+	    {{ end }}
+
+	    {{ $mediumAvatarWEBP := $originalAvatar.Resize "256x256 webp" }}
+	    {{ with $mediumAvatarWEBP | resources.Copy (print "assets/avatar/" $urlizedName "-M.webp") }}
+		{{ $mediumAvatarWEBP = . }}
+	    {{ end }}
+
+	    {{ $smallAvatarWEBP := $originalAvatar.Resize "128x128 webp" }}
+	    {{ with $smallAvatarWEBP | resources.Copy (print "assets/avatar/" $urlizedName "-S.webp") }}
+		{{ $smallAvatarWEBP = . }}
+	    {{ end }}
+
+	    {{ $extraSmallAvatarWEBP := $originalAvatar.Resize "64x64 webp" }}
+	    {{ with $extraSmallAvatarWEBP | resources.Copy (print "assets/avatar/" $urlizedName "-XS.webp") }}
+		{{ $extraSmallAvatarWEBP = . }}
+	    {{ end }}
+
+	    <!-- JPG Images -->
+	    {{ $largeAvatarJPG := $originalAvatar.Resize "512x512 jpg" }}
+	    {{ with $largeAvatarJPG | resources.Copy (print "assets/avatar/" $urlizedName "-L.jpg") }}
+		{{ $largeAvatarJPG = . }}
+	    {{ end }}
+
+	    {{ $mediumAvatarJPG := $originalAvatar.Resize "256x256 jpg" }}
+	    {{ with $mediumAvatarJPG | resources.Copy (print "assets/avatar/" $urlizedName "-M.jpg") }}
+		{{ $mediumAvatarJPG = . }}
+	    {{ end }}
+
+	    {{ $smallAvatarJPG := $originalAvatar.Resize "128x128 jpg" }}
+	    {{ with $smallAvatarJPG | resources.Copy (print "assets/avatar/" $urlizedName "-S.jpg") }}
+		{{ $smallAvatarJPG = . }}
+	    {{ end }}
+
+	    {{ $extraSmallAvatarJPG := $originalAvatar.Resize "64x64 jpg" }}
+	    {{ with $extraSmallAvatarJPG | resources.Copy (print "assets/avatar/" $urlizedName "-XS.jpg") }}
+		{{ $extraSmallAvatarJPG = . }}
+	    {{ end }}
+		<picture class="authorbox__avatar">
+		    <!-- WebP format -->
+		    <source media="(min-width: 512px)" srcset="{{ $largeAvatarWEBP.RelPermalink }}" type="image/webp">
+		    <source media="(min-width: 256px)" srcset="{{ $mediumAvatarWEBP.RelPermalink }}" type="image/webp">
+		    <source media="(min-width: 128px)" srcset="{{ $smallAvatarWEBP.RelPermalink }}" type="image/webp">
+		    <source srcset="{{ $extraSmallAvatarWEBP.RelPermalink }}" type="image/webp">
+
+		    <!-- PNG format -->
+		    <source media="(min-width: 512px)" srcset="{{ $largeAvatarPNG.RelPermalink }}" type="image/png">
+		    <source media="(min-width: 256px)" srcset="{{ $mediumAvatarPNG.RelPermalink }}" type="image/png">
+		    <source media="(min-width: 128px)" srcset="{{ $smallAvatarPNG.RelPermalink }}" type="image/png">
+		    <source srcset="{{ $extraSmallAvatarPNG.RelPermalink }}" type="image/png">
+
+		    <!-- JPG format -->
+		    <source media="(min-width: 512px)" srcset="{{ $largeAvatarJPG.RelPermalink }}" type="image/png">
+		    <source media="(min-width: 256px)" srcset="{{ $mediumAvatarJPG.RelPermalink }}" type="image/png">
+		    <source media="(min-width: 128px)" srcset="{{ $smallAvatarJPG.RelPermalink }}" type="image/png">
+		    <source srcset="{{ $extraSmallAvatarJPG.RelPermalink }}" type="image/png">
+
+
+		    <!-- Fallback JPG image -->
+		    <img alt="{{ $.Site.Author.name }} avatar" src="{{ $mediumAvatarJPG.RelPermalink }}" class="avatar" width="90" height="90">
+		</picture>
+    {{- end }}
+
+    {{- with .Site.Author.name }}
+    <div class="authorbox__header">
+        <span class="authorbox__name">{{ T "authorbox_name" (dict "Name" .) }}</span>
+    </div>
+    {{- end }}
+
+    {{- with .Site.Author.bio }}
+    <div class="authorbox__description">
+        {{ . | markdownify }}
+    </div>
+    {{- end }}
+</div>
+{{- end }}

@@ -1,0 +1,313 @@
+/* HEADER CSS ------------------------------ BEGIN ------------------------------ */
+.header-container {
+	display: grid;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: repeat(2, auto);
+	grid-column: 1/ span 24;
+	grid-row: 2/ span -1;
+	background-color: #0E171B;
+}
+.site-title {
+	grid-column: 1/ span 24;
+	justify-items: center;
+	justify-self: center;
+	font-weight: 900;
+	font-size: 96px;
+	color: #37C1DE;
+}
+.main-menu-item {
+	font-size: 24px;
+	font-weight: 900;
+	color: #EAECEB;
+	margin-right: 28px;
+}
+.main-menu-item-link.active {
+	text-decoration: underline solid #FECC61 5px;
+}
+.nav-container {
+	display: grid;
+	grid-template-columns: repeat(24, auto);
+	grid-template-rows: auto;
+	grid-column: 1/ span 24;
+	justify-self: center;
+	align-self: center;
+	padding-bottom: 1.25em;
+}
+.main-menu-container {
+	display: grid;
+	grid-auto-flow: column;
+}
+/* HEADER CSS ------------------------------  END  ------------------------------ */
+/*
+.right-sidebar {
+	display: grid;
+	grid-column: 21/ span 5;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: auto;
+}
+
+.left-sidebar {
+	grid-column: 1/ span 6;
+	grid-row: 2/ span 8;
+	display: grid;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: repeat(24, 1fr);
+	width: 100%;
+	overflow: auto;
+	background-color: red;
+}
+*/
+.left-sidebar {
+	display: grid;
+	grid-column: 1/ span 6;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: auto;
+}
+
+.top-posts-homepage-container {
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(24, 1fr);
+}
+.top-post-header {
+	grid-column: 1/ -1;
+	font-weight: 900;
+	font-size: 48px;
+	justify-self: center;
+	align-self: center;
+}
+.top-posts-list {
+	margin-left: 0.15em;
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(24, minmax(auto, 1fr));
+	grid-template-rows: repeat(24, minmax(auto, 1fr));
+	max-width: 100%;
+	/*
+	grid-auto-flow: row;
+	grid-template-rows: auto;
+	*/
+}
+.top-post-item {
+	margin-bottom: 0.75em;
+	grid-column: 1/ -1;
+}
+.top-post-headline-link {
+	font-weight: 900;
+	font-size: 38px;
+	line-height: 105%;
+}
+.top-post-headline-highlighted-word {
+	text-transform: uppercase;
+	color: #3EC9E4;
+}
+.top-post-blurb::first-letter {
+  	font-size: 1.25em;
+	font-weight: 500;
+}
+.top-post-blurb {
+	margin-top: 0.5em;
+	text-indent: 1em;
+	font-weight: 200;
+	line-height: 125%;
+	font-size: 18px;
+
+}
+.top-post-continue {
+	display: inline;
+	font-size: 18px;
+	font-weight:900;
+	color: #FFCD6D;
+}
+.top-post-item-header-image img {
+  /*min-width: 300px;*/
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.author-by {
+	font-size: 18px;
+	font-weight: 900;
+	color: #EDF1F0;
+	grid-column: 18/ span 1;
+	grid-row: 48/ span 20;
+}
+
+.post-author {
+	font-size: 18px;
+	font-weight: 900;
+	color: #84D6E8;
+	grid-column: 25/ span 5;
+	grid-row: 48/ span 20;
+}
+
+.top-post-date {
+	font-size: 20px;
+	font-weight: 500;
+	color: #368CB3;
+	grid-column: 33/ span 28;
+	grid-row: 53/ span 10;
+
+}
+.right-sidebar {
+	display: grid;
+	grid-column: 21/ -1;
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: auto;
+}
+.recent-posts-homepage-container {
+	display: grid;
+	grid-column: 1/ -1;
+}
+.recent-post-header {
+	font-weight: 900;
+	font-size: 36px;
+	text-align: center;
+	justify-self: center;
+}
+.recent-posts-list {
+	margin-left: 0.15em;
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(24, minmax(auto, 1fr));
+	grid-template-rows: repeat(24, minmax(auto, 1fr));
+	max-width: 100%;
+}
+.recent-post-item {
+	display: grid;
+	margin-bottom: 0.75em;
+	grid-column: 1/ -1;
+
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: auto;
+}
+.recent-post-item-header-image {
+	grid-column: 1/ span 3;
+}
+.recent-post-headline {
+	grid-column: 3/ -1;
+	font-weight: 900;
+	font-size: 18px;
+}
+
+
+.main-container {
+	display: grid;
+	grid-row: 2/ span 4;
+	grid-column: 7/ span 14;
+
+	grid-template-columns: repeat(24, 1fr);
+	grid-template-rows: repeat(24, minmax(5px, auto));
+}
+
+.feature-article-homepage {
+	grid-column: 1/ -1;
+
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: repeat(8, minmax(10px, auto));
+
+	margin-bottom: 1em;
+}
+.feature-post-feature-image-link, .feature-article-image {
+	grid-column: 1/ -1;
+	grid-row: 1/ -1;
+	width: 100%;
+	max-height: 710px;
+}
+.feature-article-headline-container {
+	grid-column: 1/ -1;
+	grid-row: 8/ span 1;
+        background-color: rgba(237, 238, 240, 0.50); /* #EDEEF0 with 75% transparency */
+        color: #0F171C;
+	font-size: 36px;
+}
+.feature-article-headline {
+	text-align: center;
+	font-weight: 900;
+	font-size: 34px;
+	color: #0F171C;
+}
+.feature-article-intro {
+	text-align: left;
+	margin-left: 0.5em;
+	font-weight: 200;
+	font-size: 18px;
+	color: #0F171C;
+}
+.featured-post-continue {
+	display: block;
+	text-align: center;
+	font-size: 24px;
+	font-weight:900;
+	background-color: #0F171C;
+	color: #FFCD6D;
+}
+
+
+.main-trending-post-homepage {
+	grid-column: 1/ -1;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(1px, auto));
+	grid-template-rows: repeat(4, minmax(1px, auto));
+}
+.main-trending-post-section-headline {
+	grid-column: 1/ -1;
+	font-weight: 800;
+	font-size: 34px;
+	justify-self: center;
+	align-self: center;
+
+}
+
+.main-trending-posts {
+	display: grid;
+	grid-column: 1/ -1;
+	grid-template-columns: repeat(16, minmax(1px, auto));
+	grid-template-rows: repeat(16, minmax(1px, auto));
+	grid-auto-flow: row;
+	grid-row-gap: 0.15em;
+	grid-column-gap: 0.5em;
+}
+
+.main-trending-post-headline {
+	font-weight: 900;
+	font-size: 16px;
+}
+
+.main-trending-post-item {
+	grid-column: span 8;
+}
+
+.main-trending-post-item .main-trending-post-image {
+	width: 100%;
+	height: 150px;
+}
+
+
+.sub-trending-post-homepage {
+	display: grid;
+	grid-column: 1/ -1;
+	grid-template-columns: repeat(4, minmax(1px, auto));
+	grid-template-rows: repeat(4, minmax(1px, auto));
+	grid-auto-flow: row;
+	max-width: 100%;
+}
+
+.sub-trending-posts {
+	display: grid;
+	grid-column: 1/ -1;
+	grid-template-columns: repeat(16, minmax(1px, auto));
+	grid-template-rows: repeat(16, minmax(1px, auto));
+	grid-auto-flow: column;
+}
+
+.sub-trending-post-item {
+	grid-column: 1/ -1;
+}
+
+.sub-trending-post-image {
+	width: 100%;
+	height: auto;
+}
+

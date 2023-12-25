@@ -1,0 +1,34 @@
+[settings]
+formats = ["avif", "webp", "png", "jpeg"]
+
+[[settings.image_types]]
+name = "thumbnail"
+sizes = ["1280x720", "640x360", "320x180", "160x90"]
+postfixes = ["TL", "TM", "TS", "TES"]
+content_dir = "/home/bb/Documents/upcomingtrader_blog/content"
+output_dir = "/home/bb/Documents/upcomingtrader_blog/resources/optimized"
+
+[[settings.image_types]]
+name = "header"
+sizes = ["1280x", "640x", "320x", "160x"]
+postfixes = ["HL", "HM", "HS", "HES"]
+content_dir = "/home/bb/Documents/upcomingtrader_blog/content"
+output_dir = "/home/bb/Documents/upcomingtrader_blog/resources/optimized"
+
+[[settings.image_types]]
+name = "authorbox"
+sizes = ["512x512", "256x256", "128x128", "64x64"]
+postfixes = ["AL", "AM", "AS", "AES"]
+author_dir = "/home/bb/Documents/upcomingtrader_blog/data"
+content_dir = "/home/bb/Documents/upcomingtrader_blog/content/authors/ut"
+output_dir = "/home/bb/Documents/upcomingtrader_blog/resources/authors"
+
+
+[[settings.image_types]]
+name = "org_logo"
+sizes = ["512x512", "256x256", "128x128", "64x64"]
+postfixes = ["OLL", "OLM", "OLS", "OLES"]
+org_logo_path = "/home/bb/Documents/upcomingtrader_blog/src_img/org_logo.jpeg"
+org_config = "/home/bb/Documents/upcomingtrader_blog/data/organization.toml"
+output_dir = "/home/bb/Documents/upcomingtrader_blog/resources/organization"
+content_dir = "/home/bb/Documents/upcomingtrader_blog/data/"
