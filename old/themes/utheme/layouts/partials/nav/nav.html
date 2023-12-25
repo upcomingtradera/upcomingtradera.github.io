@@ -1,8 +1,0 @@
-<ul class="mainMenuContainer">
-    {{ range .Site.Menus.main }}
-    	{{ $currentPage := . }}
-        <li class="mainMenuItem">
-	    <a class="mainMenuItemLink {{ if or (eq .URL $.Page.RelPermalink) (and (strings.HasPrefix $.Page.RelPermalink "/blog/") (eq .Name "Blog")) }}active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
-        </li>
-    {{ end }}
-</ul>

@@ -1,8 +1,0 @@
-{{ range .Site.RegularPages }}
-    {{ $title := .Title }}
-    {{ $titleLength := len $title }}
-    {{ if gt $titleLength 60 }}
-        {{ $overLimit := sub $titleLength 60 }}
-        {{ warnf "Title in file '%s' is too long by %d characters. Title: %s" .File.Path $overLimit $title }}
-    {{ end }}
-{{ end }}

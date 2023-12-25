@@ -1,6 +1,0 @@
-{{ range .Site.RegularPages }}
-  {{ $summary := .Summary | plainify }}
-  {{ if gt (len $summary) 160 }}
-    {{ warnf "The summary for the page '%s' is too long for Google SEO guidelines: %d characters (limit is 160 characters)" .Permalink (len $summary) }}
-  {{ end }}
-{{ end }}
